@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 // import PropTypes from 'prop-types';
 
 import { connectRedux } from '../utils';
@@ -6,12 +6,16 @@ import { connectRedux } from '../utils';
 const Home = () => {
   const [users, setUsers] = useState([])
   const [valueInput, setValueInput] = useState('')
-
-  const { ipcRenderer } = window.require('electron');
-
-  ipcRenderer.on('user-reply', (event, arg) => {
-    if (arg !== null) setUsers(JSON.parse(arg))
-  })
+  useEffect(() => {
+    try {
+      const { ipcRenderer } = window.require('electron');
+      ipcRenderer.on('user-reply', (event, arg) => {
+        if (arg !== null) setUsers(JSON.parse(arg))
+      })
+    } catch (err) {
+      console.error(err);
+    }
+  }, [])
   
   const handleCreateUser = () => {
     try {

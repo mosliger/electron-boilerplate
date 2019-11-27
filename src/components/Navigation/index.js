@@ -1,20 +1,13 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { NavLink } from 'react-router-dom';
 
 import Style from './style';
 
 const Navigation = () => {
-  const [isOpen, toggerMenu] = useState(false);
   return (
     <Style>
-      <button
-        className={`togger-menu ${isOpen ? 'active' : ''}`}
-        onClick={() => toggerMenu(!isOpen)}
-      >
-        <i className={`fas fa-${isOpen ? 'times' : 'bars'}`} />
-      </button>
       <div className="logo">LOGO</div>
-      <nav className={`menu-list ${isOpen ? 'active' : ''}`}>
+      <nav className="menu-list">
         <ul>
           <li>
             <NavLink to="/" exact activeClassName="active">
